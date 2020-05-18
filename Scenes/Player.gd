@@ -1,7 +1,5 @@
 extends Area2D
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+# TESTING FROM GINA's Computer!
 
 export var speed = 400  # How fast the player will move (pixels/sec).
 var screen_size  # Size of the game window.
