@@ -14,7 +14,6 @@ func _ready():
 	sprite_size = $AnimatedSprite.frames.get_frame("up", 0).get_size() * ($AnimatedSprite.transform.get_scale() / 2 )
 	print(sprite_size)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity = Vector2()  # The player's movement vector.
@@ -33,7 +32,6 @@ func _process(delta):
 	else:
 		$AnimatedSprite.stop()
 	
-	
 	position += velocity * delta
 	position.x = clamp(position.x, sprite_size.x, screen_size.x - sprite_size.x)
 	position.y = clamp(position.y, sprite_size.y, screen_size.y - sprite_size.y)
@@ -47,17 +45,10 @@ func _process(delta):
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_v = velocity.y > 0
 
-
-func _on_Player_area_entered(_area):
-	hide()  # Player disappears after being hit.
-	emit_signal("hit")
-	$CollisionShape2D.set_deferred("disabled", true)
-
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
-
 
 func _on_Player_body_entered(body):
 	hide()  # Player disappears after being hit.
