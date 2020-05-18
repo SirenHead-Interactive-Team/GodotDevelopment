@@ -41,3 +41,4 @@ __meta__ = {
 "_edit_group_": true
 }
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

@@ -5,6 +5,7 @@ extends Node
 
 export (PackedScene) var Mob
 var score
+var perimeter
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +19,7 @@ func _ready():
 
 
 func _on_Player_hit():
-	pass # Replace with function body.
+	game_over()
 
 
 func game_over():
@@ -48,7 +49,11 @@ func _on_ScoreTimer_timeout():
 
 func _on_MobTimer_timeout():
 	# Choose a random location on Path2D.
-	$MobPath/MobSpawnLocation.offset = randi()
+	$MobPath/MobSpawnLocation.set_offset(randi())
+	print("----")
+	print($MobPath/MobSpawnLocation.get_offset())
+	print($MobPath/MobSpawnLocation.get_position_in_parent())
+	print($MobPath/MobSpawnLocation.get_position())
 	
 	var mob = Mob.instance()
 	add_child(mob)
