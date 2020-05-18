@@ -10,14 +10,14 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "fly",
-"speed": 4.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "walk",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "fly",
 "speed": 4.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ) ],
@@ -44,7 +44,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.135284, 0.135277 )
 rotation = 1.5708
 shape = SubResource( 2 )
 __meta__ = {

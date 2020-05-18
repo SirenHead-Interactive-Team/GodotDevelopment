@@ -21,3 +21,16 @@ func _ready():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+	
+func set_movement(spawn_location):
+	set_rotation(spawn_location)
+	set_linear_velocity(rotation)
+
+func set_rotation(spawn_location):
+	var variation = rand_range(-PI / 4, PI / 4)
+	rotation = (spawn_location.rotation + PI / 2) + variation
+	
+	position = spawn_location.position
+
+func set_linear_velocity(direction):
+	linear_velocity = Vector2(rand_range(min_speed, max_speed), 0).rotated(direction)
