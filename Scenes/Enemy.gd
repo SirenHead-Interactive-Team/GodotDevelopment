@@ -7,7 +7,7 @@ var mob_capsule_hitbox = ["walk", "swim"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimatedSprite.animation = mob_types[randi() % mob_types.size()]
+	$AnimatedSprite.set_animation(mob_types[randi() % mob_types.size()])
 	
 	if $AnimatedSprite.animation in mob_capsule_hitbox:
 		var capsule = CapsuleShape2D.new()
@@ -15,7 +15,7 @@ func _ready():
 		capsule.set_height(27)
 		$CollisionShape2D.set_shape(capsule)
 
-
+	$AnimatedSprite._set_playing(true)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

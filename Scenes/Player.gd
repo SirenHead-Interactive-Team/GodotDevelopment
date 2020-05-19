@@ -12,7 +12,6 @@ func _ready():
 	
 	screen_size = get_viewport_rect().size
 	sprite_size = $AnimatedSprite.frames.get_frame("up", 0).get_size() * ($AnimatedSprite.transform.get_scale() / 2 )
-	print(sprite_size)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -27,7 +26,6 @@ func _process(delta):
 		velocity.y -= 1
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		print()
 		$AnimatedSprite.play()
 	else:
 		$AnimatedSprite.stop()
