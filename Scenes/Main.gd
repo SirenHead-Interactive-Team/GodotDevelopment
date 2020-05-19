@@ -13,11 +13,6 @@ func _ready():
 	randomize()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func _on_Player_hit():
 	game_over()
 
@@ -50,10 +45,6 @@ func _on_ScoreTimer_timeout():
 func _on_MobTimer_timeout():
 	# Choose a random location on Path2D.
 	$MobPath/MobSpawnLocation.set_offset(randi())
-	print("----")
-	print($MobPath/MobSpawnLocation.get_offset())
-	print($MobPath/MobSpawnLocation.get_position_in_parent())
-	print($MobPath/MobSpawnLocation.get_position())
 	
 	var mob = Mob.instance()
 	add_child(mob)

@@ -5,7 +5,7 @@
 [ext_resource path="res://dodge_assets/art/enemyWalking_1.png" type="Texture" id=3]
 [ext_resource path="res://dodge_assets/art/enemySwimming_1.png" type="Texture" id=4]
 [ext_resource path="res://dodge_assets/art/enemySwimming_2.png" type="Texture" id=5]
-[ext_resource path="res://dodge_assets/art/enemyFlyingAlt_2.png" type="Texture" id=6]
+[ext_resource path="res://dodge_assets/art/enemyFlyingAlt_2.1.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/Enemy.gd" type="Script" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -15,20 +15,20 @@ animations = [ {
 "name": "walk",
 "speed": 4.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "fly",
-"speed": 4.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "swim",
 "speed": 4.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "fly",
+"speed": 4.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 35.6818
-height = 9.61104
+[sub_resource type="ConvexPolygonShape2D" id=2]
+custom_solver_bias = 1.0
+points = PoolVector2Array( 16, -24, 8, -26.5, 0, -27, -8, -26.5, -16, -24, -24, -17, -30.25, -8, -33, 0, -33, 14, -31, 18, -18, 27, 19, 27, 32, 18, 34, 12, 34, 0, 31.25, -8, 26, -16, 16, -24 )
 
 [node name="Enemy" type="RigidBody2D"]
 collision_mask = 0
@@ -36,9 +36,12 @@ gravity_scale = 0.0
 script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -14, 0 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
-animation = "walk"
+animation = "fly"
+frame = 1
+playing = true
 __meta__ = {
 "_edit_group_": true
 }
