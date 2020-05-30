@@ -12,7 +12,7 @@ env:
 
 jobs:
   export-windows:
-    name: Windows Export
+    name: WindowsExport
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:3.2.1
@@ -34,7 +34,7 @@ jobs:
           path: build/windows
 
   export-linux:
-    name: Linux Export
+    name: LinuxExport
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:3.2.1
@@ -56,7 +56,7 @@ jobs:
           path: build/linux
 
   export-web:
-    name: Web Export
+    name: WebExport
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:3.2.1
@@ -78,7 +78,7 @@ jobs:
           path: build/web
 
   export-mac:
-    name: Mac Export
+    name: MacExport
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:3.2.1
