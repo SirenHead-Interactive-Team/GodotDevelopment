@@ -12,7 +12,9 @@ env:
 
 jobs:
   export-windows:
-    name: WindowsExport
+    env:
+      EXPORT_NAME: 3dtutorial_win_x64
+    name: 3dtutorial_win_x64
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:3.2.1
@@ -34,6 +36,8 @@ jobs:
           path: build/windows
 
   export-linux:
+    env:
+      EXPORT_NAME: 3dtutorial_linux
     name: LinuxExport
     runs-on: ubuntu-latest
     container:
@@ -56,6 +60,8 @@ jobs:
           path: build/linux
 
   export-web:
+    env:
+      EXPORT_NAME: index
     name: WebExport
     runs-on: ubuntu-latest
     container:
@@ -70,7 +76,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
-          godot -v --export "HTML5" ../build/web/index.html
+          godot -v --export "HTML5" ../build/web/$EXPORT_NAME.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -78,6 +84,8 @@ jobs:
           path: build/web
 
   export-mac:
+    env:
+      EXPORT_NAME: 3dtutorial_mac
     name: MacExport
     runs-on: ubuntu-latest
     container:
