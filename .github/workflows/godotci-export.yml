@@ -10,6 +10,7 @@ env:
   GODOT_VERSION: 3.2.1
   EXPORT_NAME: test-project
 
+jobs:
   export-linux:
     env:
       EXPORT_NAME: 3dtutorial_linux
@@ -34,7 +35,6 @@ env:
           name: linux
           path: build/linux
 
-jobs:
   export-windows:
     env:
       EXPORT_NAME: 3dtutorial_win_x64
