@@ -2,7 +2,9 @@
 
 LINUX_EXPORTS=linux_automated_exports.cfg
 EXPORTS_BACKUP=export_presets.cfg.bkp 
-EXPORTS=export_presets.cfg 
+EXPORTS=export_presets.cfg
+
+TEMPLATE_ZIP=Godot_v3.2.1-stable_export_templates.zip
 
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   -c | --clean | --cleanup )
@@ -47,15 +49,30 @@ if [[ "$1" == '--' ]]; then shift; fi
 
 
 # download & unzip the templates
-wget https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_export_templates.tpz --output-document Godot_v3.2.1-stable_export_templates.zip
-unzip Godot_v3.2.1-stable_export_templates.zip
+if  [ ! -f "$EXPORTS" ]; then
+  echo "Downloading godot v3.2.1 templates..."
+  wget https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_export_templates.tpz --output-document $TEMPLATE_ZIP
+fi
+echo "Unzipping godot v3.2.1 templates..."
+unzip -o -q $TEMPLATE_ZIP
 # put the templates in the desired linux folder
+echo "Copying templates to godot-visible folder..."
 sudo mkdir -p ~/.local/share/godot/templates/3.2.1.stable/
 sudo cp templates/* ~/.local/share/godot/templates/3.2.1.stable/
 if  [ -f "$EXPORTS" ]; then
-  # save the poor soul who tries to run this on their local linux install
-  mv export_presets.cfg export_presets.cfg.bkp
+    if cmp -s "$EXPORTS" "$LINUX_EXPORTS"; then
+      echo "Current exports config matches linux exports config"
+    else
+      echo "User defind configs present - backing them up..."
+      # save the poor soul who tries to run this on their local linux install
+      mv $EXPORTS $EXPORTS_BACKUP
+    fi
 fi
-# use the linux configs
-cp $LINUX_EXPORTS $EXPORTS
 
+if  [ -f "$EXPORTS" ]; then
+  echo "No need to copy linux configs, already present"
+else
+  echo "Linux exports taking precedence..."
+  # use the linux configs
+  cp $LINUX_EXPORTS $EXPORTS
+fi

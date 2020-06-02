@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Perspective.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Perspective.gd" type="Script" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.027451, 0.537255, 0.603922, 1 )

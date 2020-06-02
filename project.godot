@@ -55,6 +55,10 @@ move_jump={
  ]
 }
 
+[logging]
+
+file_logging/log_path="res://logs/log.txt"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
