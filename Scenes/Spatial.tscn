@@ -1,0 +1,102 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Scenes/Cube.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Area.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Cube.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/StaticBody.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=12]
+
+[sub_resource type="BoxShape" id=13]
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.0862745, 0.321569, 0, 1 )
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 1, 1, 0, 1 )
+
+[sub_resource type="CubeMesh" id=6]
+material = SubResource( 5 )
+
+[sub_resource type="BoxShape" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 1, 1, 1, 0 )
+
+[sub_resource type="CubeMesh" id=9]
+material = SubResource( 8 )
+
+[sub_resource type="ProceduralSky" id=10]
+
+[sub_resource type="Environment" id=11]
+background_mode = 2
+background_sky = SubResource( 10 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_sky_contribution = 0.6
+
+[node name="Spatial" type="Spatial"]
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 8, -4 )
+light_energy = 4.64
+shadow_enabled = true
+shadow_color = Color( 0.45098, 0.45098, 0.45098, 1 )
+spot_range = 87.0
+spot_attenuation = 0.17076
+spot_angle = 34.1
+spot_angle_attenuation = 0.31864
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 8, 0, 0, 0, 0.001, 0, 0, 0, 8, 0, 0, -4 )
+physics_material_override = SubResource( 12 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 13 )
+
+[node name="Plane" type="MeshInstance" parent="StaticBody"]
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Cube" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+script = ExtResource( 3 )
+
+[node name="ColorChangeBox" type="Area" parent="."]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, -4 )
+gravity = 9.81
+collision_layer = 5
+
+[node name="CollisionShape" type="CollisionShape" parent="ColorChangeBox"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ColorChangeBox"]
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0 )
+collision_layer = 512
+collision_mask = 512
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Area"]
+mesh = SubResource( 9 )
+material/0 = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 11 )
+[connection signal="tree_entered" from="StaticBody" to="StaticBody" method="_on_StaticBody_tree_entered"]
+[connection signal="tree_exited" from="StaticBody" to="StaticBody" method="_on_StaticBody_tree_exited"]
+[connection signal="tree_exiting" from="StaticBody" to="StaticBody" method="_on_StaticBody_tree_exiting"]
+[connection signal="body_entered" from="ColorChangeBox" to="Cube" method="_on_ColorChangeBox_body_entered"]
+[connection signal="body_exited" from="ColorChangeBox" to="Cube" method="_on_ColorChangeBox_body_exited"]
+[connection signal="body_exited" from="Area" to="Area" method="_on_Area_body_exited"]
+[connection signal="out_of_bounds" from="Area" to="Cube" method="_on_Area_out_of_bounds"]

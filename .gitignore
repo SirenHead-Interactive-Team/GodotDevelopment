@@ -11,3 +11,9 @@ data_*/
 
 # asset-specific ignores
 addons/
+
+# project specific ignores
+*.bkp
+template*/
+Godot_v*.zip
+Godot_v*.tpz
