@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=2]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.72549, 0.0235294, 0.764706, 1 )
+sky_horizon_color = Color( 0.964706, 0.607843, 0.0470588, 1 )
+sky_curve = 0.141225
+sun_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+
+[sub_resource type="PhysicsMaterial" id=3]
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="Skin" id=5]
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0.0470588, 0.47451, 0.0235294, 1 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.980863, 1, 1.00134 )
+
+[sub_resource type="CapsuleMesh" id=7]
+
+[sub_resource type="Skin" id=8]
+
+[sub_resource type="CapsuleShape" id=9]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+current = true
+__meta__ = {
+"_editor_description_": "Da Node
+"
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Ground" type="StaticBody" parent="."]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
+physics_material_override = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 4 )
+skin = SubResource( 5 )
+material/0 = SubResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 6 )
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Player"]
+mesh = SubResource( 7 )
+skin = SubResource( 8 )
+material/0 = null
+
+[node name="CollisionShape2" type="CollisionShape" parent="Player"]
+shape = SubResource( 9 )
+
+[node name="TarJayyy" type="Spatial" parent="Player"]
+
+[node name="Perspective" type="Camera" parent="Player/TarJayyy"]
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
